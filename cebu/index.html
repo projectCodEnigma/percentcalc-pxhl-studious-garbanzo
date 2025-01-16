@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2em;
+        }
+
+        .calculator {
+            margin: 20px 0;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f9f9ff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group label {
+            flex: 2;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        input[type="number"], select {
+            flex: 3;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px 15px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 5px solid #007BFF;
+            font-size: 1em;
+            color: #333;
+            border-radius: 5px;
+        }
+
+        .tips {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            button {
+                font-size: 0.8em;
+            }
+
+            input[type="number"] {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Percentage Calculator</h1>
+
+        <div class="calculator">
+            <!-- What is X% of Y -->
+            <div class="form-group">
+                <label>What is <input type="number" id="percentage" placeholder="%"> of <input type="number" id="total" placeholder="Total">?</label>
+                <button onclick="calculatePercentage()">Calculate</button>
+            </div>
+            <div id="result-percentage" class="result"></div>
+
+            <!-- X is what percent of Y -->
+            <div class="form-group">
+                <label><input type="number" id="part" placeholder="Part"> is what percent of <input type="number" id="whole" placeholder="Whole">?</label>
+                <button onclick="calculatePercentOf()">Calculate</button>
+            </div>
+            <div id="result-percent-of" class="result"></div>
+
+            <!-- Percentage increase/decrease -->
+            <div class="form-group">
+                <label>What is the percentage increase/decrease from <input type="number" id="from" placeholder="From"> to <input type="number" id="to" placeholder="To">?</label>
+                <button onclick="calculateChange()">Calculate</button>
+            </div>
+            <div id="result-change" class="result"></div>
+        </div>
+
+        <div class="tips">
+            <h3>Tips:</h3>
+            <ul>
+                <li>Use this calculator for discounts, tax calculations, and more!</li>
+                <li>Ensure inputs are numbers to avoid errors.</li>
+                <li>Click the "Calculate" button after entering values.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function calculatePercentage() {
+            const percentage = parseFloat(document.getElementById('percentage').value);
+            const total = parseFloat(document.getElementById('total').value);
+
+            if (!isNaN(percentage) && !isNaN(total)) {
+                const result = (percentage / 100) * total;
+                document.getElementById('result-percentage').textContent = `${percentage}% of ${total} is ${result.toFixed(2)}`;
+            } else {
+                document.getElementById('result-percentage').textContent = 'Please enter valid numbers.';
+            }
+        }
+
+        function calculatePercentOf() {
+            const part = parseFloat(document.getElementById('part').value);
+            const whole = parseFloat(document.getElementById('whole').value);
+
+            if (!isNaN(part) && !isNaN(whole)) {
+                const result = (part / whole) * 100;
+                document.getElementById('result-percent-of').textContent = `${part} is ${result.toFixed(2)}% of ${whole}`;
+            } else {
+                document.getElementById('result-percent-of').textContent = 'Please enter valid numbers.';
+            }
+        }
+
+        function calculateChange() {
+            const from = parseFloat(document.getElementById('from').value);
+            const to = parseFloat(document.getElementById('to').value);
+
+            if (!isNaN(from) && !isNaN(to)) {
+                const result = ((to - from) / from) * 100;
+                document.getElementById('result-change').textContent = `The percentage change from ${from} to ${to} is ${result.toFixed(2)}%`;
+            } else {
+                document.getElementById('result-change').textContent = 'Please enter valid numbers.';
+            }
+        }
+    </script>
+</body>
+</html>
